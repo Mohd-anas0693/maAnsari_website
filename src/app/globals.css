@@ -1,0 +1,584 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   MA ANSARI — DESIGN TOKENS
+   A dark, editorial palette. The design must hold up with every gold
+   accent removed; brass is an inflection, never the subject.
+   ========================================================================== */
+
+@theme {
+  /* Ink — the foundation */
+  --color-ink-950: #0a0a0a;
+  --color-ink-900: #111111;
+  --color-ink-850: #141413;
+  --color-ink-800: #171717;
+  --color-ink-750: #1c1c1a;
+  --color-ink-700: #23231f;
+  --color-ink-600: #2e2e29;
+  --color-ink-500: #3d3d36;
+  --color-ink-400: #57564d;
+
+  /* Light — warm ivory, never pure white */
+  --color-ivory: #f5f2ea;
+  --color-cream: #e9e2d4;
+  --color-bone: #cdc5b4;
+  --color-stone: #98938a;
+  /* Lightened from #6e6a62, which fell to 3.7:1 and failed AA for the small
+     meta text it is used on. This clears 4.5:1 on both ink surfaces. */
+  --color-ash: #807c74;
+
+  /* Metal — used sparingly */
+  --color-champagne: #cdb78e;
+  --color-gold: #b4945e;
+  --color-brass: #96794e;
+
+  /* Semantic */
+  --color-canvas: var(--color-ink-950);
+  --color-canvas-raised: var(--color-ink-900);
+  --color-hairline: #2a2a25;
+  --color-hairline-strong: #3a3a33;
+
+  /* Typography */
+  --font-display: var(--font-cormorant), "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Editorial scale — clamped for fluid type without layout shift */
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--line-height: 1.4;
+  --text-eyebrow--letter-spacing: 0.22em;
+
+  /* Motion */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-silk: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-drape: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Layout */
+  --spacing-gutter: 1.5rem;
+  --breakpoint-xs: 26rem;
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+@layer base {
+  * {
+    min-width: 0;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    background-color: var(--color-ink-950);
+    color-scheme: dark;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-ink-950);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    color: var(--color-ivory);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-champagne);
+    color: var(--color-ink-950);
+  }
+
+  /* Never trap keyboard users behind a decorative hidden state */
+  [data-reveal]:focus-within {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  hr {
+    border-color: var(--color-hairline);
+  }
+}
+
+/* ==========================================================================
+   FOCUS
+   Deliberately unlayered. Tailwind's utilities live in a later cascade layer
+   than `base`, and `transition-colors` includes `outline-color` — which made
+   the focus ring fade in over 300ms instead of appearing at once. An
+   unlayered rule outranks every layered one, so the ring is immediate.
+   ========================================================================== */
+
+:focus-visible {
+  outline: 2px solid var(--color-champagne);
+  outline-offset: 3px;
+  border-radius: 1px;
+  /* Keep the element's own colour transitions, drop the one on the ring. */
+  transition-property: color, background-color, border-color,
+    text-decoration-color, opacity, transform;
+}
+
+/* ==========================================================================
+   MOTION GATING
+   Initial hidden states apply only once JS has confirmed it can animate
+   (see MotionGate). Without JS, or with reduced motion, every element
+   renders in its final, readable state. Content is never motion-dependent.
+   ========================================================================== */
+
+@layer components {
+  .motion-ready [data-reveal] {
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  .motion-ready [data-reveal="up"] {
+    transform: translate3d(0, 1.75rem, 0);
+  }
+
+  .motion-ready [data-reveal="rise"] {
+    transform: translate3d(0, 3.5rem, 0);
+  }
+
+  /* Masked lines: each line gets its own clipping box so descenders are
+     never cut, and the inner span is what actually travels. */
+  .mask-line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.14em;
+    margin-bottom: -0.14em;
+  }
+
+  .motion-ready [data-reveal-mask] {
+    opacity: 1;
+  }
+
+  .motion-ready [data-mask-line] {
+    display: block;
+    transform: translate3d(0, 110%, 0);
+    will-change: transform;
+  }
+
+  .motion-ready [data-reveal-clip] {
+    opacity: 1;
+    clip-path: inset(0 0 100% 0);
+    will-change: clip-path;
+  }
+
+  [data-revealed] {
+    will-change: auto;
+  }
+
+  /* Editorial hairline used between sections and inside grids */
+  .hairline {
+    border-color: var(--color-hairline);
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-stone);
+  }
+
+  .prose-editorial {
+    color: color-mix(in oklab, var(--color-cream) 78%, transparent);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+
+  .prose-editorial p + p {
+    margin-top: 1.25em;
+  }
+
+  .prose-editorial strong {
+    color: var(--color-ivory);
+    font-weight: 500;
+  }
+
+  .prose-editorial a {
+    color: var(--color-champagne);
+    text-underline-offset: 0.25em;
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: color-mix(in oklab, var(--color-champagne) 40%, transparent);
+    transition: text-decoration-color 200ms var(--ease-silk);
+  }
+
+  .prose-editorial a:hover {
+    text-decoration-color: var(--color-champagne);
+  }
+
+  /* A woven, fabric-like surface. Pure CSS, no image request. */
+  .weave {
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        color-mix(in oklab, var(--color-ivory) 2%, transparent) 0 1px,
+        transparent 1px 4px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        color-mix(in oklab, var(--color-ivory) 2%, transparent) 0 1px,
+        transparent 1px 4px
+      );
+  }
+
+  /*
+   * Film grain. Two things here are deliberate:
+   *
+   * `numOctaves` is 1 rather than 3. feTurbulence is rasterised on the main
+   * thread before first paint, and each octave multiplies that work — on a
+   * throttled phone the three-octave version was measurably delaying FCP on
+   * the home page, where this sits on the hero backdrop.
+   *
+   * There is no `mix-blend-mode`. Blending forces the element onto its own
+   * compositing layer and re-blends on every paint, which is a poor trade for
+   * a texture this subtle. Plain opacity looks near-identical here.
+   */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.22;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .fluid-display {
+    font-size: clamp(2.75rem, 1.2rem + 6.4vw, 8.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+  }
+
+  .fluid-h2 {
+    font-size: clamp(2rem, 1rem + 3.6vw, 4.75rem);
+    line-height: 1;
+    letter-spacing: -0.015em;
+  }
+
+  .fluid-h3 {
+    font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .shell {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 90rem;
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 48rem) {
+    .shell {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  @media (min-width: 80rem) {
+    .shell {
+      padding-inline: 4rem;
+    }
+  }
+
+  .shell-narrow {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 52rem;
+    padding-inline: 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   REDUCED MOTION — a global, non-negotiable override
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal],
+  [data-mask-line],
+  [data-reveal-clip] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
+
+/* The hero scroll hint. The one looping animation on the site, and it is
+   purely decorative, one element, and transform-only. */
+@keyframes scrollHint {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-\[scrollHint_2\.4s_cubic-bezier\(0\.65\,0\,0\.35\,1\)_infinite\] {
+    animation: none;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   SUIT CONSTRUCTION
+   Two layouts from one markup tree.
+
+   Without JavaScript, or with reduced motion, the section is an ordinary
+   article: every layer of the suit is visible and every stage is written out
+   in document flow. The sticky, scroll-driven version is applied only once
+   `.motion-ready` confirms it can be driven.
+   ========================================================================== */
+
+.construction {
+  height: auto;
+}
+
+.construction__viewport {
+  position: static;
+  height: auto;
+}
+
+.construction__layer {
+  opacity: 1;
+}
+
+.construction__caption {
+  position: static;
+  opacity: 1;
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.construction__rail,
+.construction__counter {
+  display: none;
+}
+
+.motion-ready .construction {
+  /* Phones get a shorter run so the story does not outstay its welcome. */
+  height: var(--construction-height-sm, 400vh);
+}
+
+@media (min-width: 64rem) {
+  .motion-ready .construction {
+    height: var(--construction-height, 520vh);
+  }
+}
+
+.motion-ready .construction__viewport {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+}
+
+.motion-ready .construction__layer {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.motion-ready .construction__caption {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  opacity: 0;
+  padding-block: 0;
+  border-top: 0;
+  will-change: opacity, transform;
+}
+
+.motion-ready .construction__counter {
+  display: block;
+}
+
+/*
+ * The rail is a vertical progress bar and needs height the phone viewport
+ * cannot spare. Its visibility is owned here rather than by a utility class,
+ * because these descendant selectors would outrank one.
+ */
+.motion-ready .construction__rail {
+  display: none;
+}
+
+@media (min-width: 64rem) {
+  .motion-ready .construction__rail {
+    display: block;
+  }
+}
+
+.motion-ready .construction__captions {
+  position: relative;
+  min-height: 15rem;
+}
+
+@media (min-width: 64rem) {
+  .motion-ready .construction__captions {
+    min-height: 19rem;
+  }
+}
+
+/* ==========================================================================
+   HERO ENTRANCE
+   ---------------------------------------------------------------------------
+   Declared in CSS rather than driven by Anime.js, and this is a deliberate
+   exception to the rule that all motion lives in `src/animations`.
+
+   Everything above the fold is the Largest Contentful Paint candidate. A
+   JavaScript timeline cannot start until React has hydrated, so hiding hero
+   text until then adds hydration time *plus* the animation to LCP. Measured
+   on a 4x-throttled CPU over a 1.6 Mbps connection, the JS version produced
+   an LCP of 4.1s. These keyframes start as soon as the stylesheet applies,
+   which is before the JavaScript has even downloaded.
+
+   The sequence is identical to the one it replaces: backdrop settle, image
+   wipe, navigation, eyebrow, heading word by word, supporting copy, calls to
+   action, scroll indicator. Per-item stagger is set inline as an
+   `animation-delay`, because that is layout data rather than animation logic.
+
+   Everything below the fold — the suit construction, section reveals, image
+   wipes, the navigation overlay — is still Anime.js, where the cost is paid
+   long after first paint and the control is worth having.
+   ========================================================================== */
+
+@keyframes heroBackdrop {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes heroMedia {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes heroWord {
+  from {
+    transform: translate3d(0, 108%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes heroRise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes heroDrop {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.motion-ready .hero-backdrop {
+  animation: heroBackdrop 1900ms var(--ease-drape) both;
+}
+
+.motion-ready .hero-media {
+  animation: heroMedia 760ms var(--ease-drape) both;
+  will-change: clip-path, opacity;
+}
+
+.motion-ready .site-nav {
+  animation: heroDrop 400ms var(--ease-editorial) 120ms both;
+}
+
+.motion-ready .hero-eyebrow {
+  animation: heroRise 380ms var(--ease-editorial) 150ms both;
+}
+
+.motion-ready .hero-word {
+  display: inline-block;
+  animation: heroWord 560ms var(--ease-editorial) 180ms both;
+  will-change: transform;
+}
+
+/* The LCP element. Its delay and duration are the two numbers that move
+   Largest Contentful Paint, so change them only with a measurement. */
+.motion-ready .hero-support {
+  animation: heroRise 380ms var(--ease-editorial) 440ms both;
+}
+
+.motion-ready .hero-action {
+  animation: heroRise 380ms var(--ease-editorial) 640ms both;
+}
+
+.motion-ready .hero-indicator {
+  animation: heroRise 380ms var(--ease-editorial) 900ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-backdrop,
+  .hero-media,
+  .site-nav,
+  .hero-eyebrow,
+  .hero-word,
+  .hero-support,
+  .hero-action,
+  .hero-indicator {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
