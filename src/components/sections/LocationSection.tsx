@@ -23,7 +23,7 @@ export function LocationSection() {
     <section
       id="visit"
       aria-labelledby="visit-heading"
-      className="relative border-t border-hairline py-24 lg:py-32"
+      className="relative border-t border-hairline py-14 sm:py-18 lg:py-24"
     >
       <div className="shell grid gap-14 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">

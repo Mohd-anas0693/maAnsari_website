@@ -107,14 +107,14 @@ export function AppointmentForm({
   const waFallback = whatsappUrl("appointment");
 
   return (
-    <form onSubmit={onSubmit} noValidate={false} className="grid gap-6">
+    <form onSubmit={onSubmit} noValidate={false} className="grid gap-5">
       {/* Honeypot. Hidden from sight and from assistive technology. */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label htmlFor="company">Company</label>
         <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Name" name="name" required autoComplete="name" />
         <Field
           label="Phone"
@@ -129,7 +129,7 @@ export function AppointmentForm({
 
       <Field label="Email" name="email" type="email" autoComplete="email" optional />
 
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Preferred date" name="date" type="date" optional />
         <SelectField label="Preferred time" name="time" options={[...TIMES]} optional />
       </div>
@@ -148,7 +148,7 @@ export function AppointmentForm({
         <textarea
           id="message"
           name="message"
-          rows={4}
+          rows={3}
           className={inputClass}
           placeholder="The occasion, your dates, or a question."
         />
@@ -203,7 +203,7 @@ export function AppointmentForm({
 /* ------------------------------------------------------------------ */
 
 const inputClass =
-  "mt-2.5 block w-full border border-hairline-strong bg-ink-900 px-4 py-3.5 font-sans text-[0.9375rem] text-ivory " +
+  "mt-2 block w-full border border-hairline-strong bg-ink-900 px-4 py-3 font-sans text-[0.9375rem] text-ivory " +
   "transition-colors duration-300 placeholder:text-ash " +
   "focus:border-champagne focus:outline-2 focus:outline-offset-2 focus:outline-champagne";
 

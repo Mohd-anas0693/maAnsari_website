@@ -204,6 +204,7 @@ export const primaryNav: NavItem[] = [
       { label: "Three-Piece Suits", href: "/three-piece-suits" },
       { label: "Wedding Suits", href: "/wedding-suits" },
       { label: "Corporate Suits", href: "/corporate-suits" },
+      { label: "Bandhgala & Indian Formalwear", href: "/indian-formalwear" },
     ],
   },
   {
@@ -243,6 +244,7 @@ export const footerNav: { title: string; links: { label: string; href: string }[
     title: "Occasions",
     links: [
       { label: "Wedding Suits", href: "/wedding-suits" },
+      { label: "Bandhgala & Indian Formalwear", href: "/indian-formalwear" },
       { label: "Groom & Wedding Party", href: "/wedding-suits#wedding-party" },
       { label: "Corporate Suits", href: "/corporate-suits" },
       { label: "Alterations & Refitting", href: "/alterations" },

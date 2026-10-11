@@ -1,6 +1,8 @@
 import { siteConfig, BUSINESS_NAME, sameAs } from "@/data/site";
 import { absoluteUrl } from "@/lib/seo";
 import type { Faq } from "@/data/faqs";
+import { services } from "@/data/services";
+import { locations } from "@/data/locations";
 
 /**
  * STRUCTURED DATA
@@ -93,22 +95,58 @@ export function localBusinessSchema(): Json {
      * The geographic area customers are genuinely served from. Only cities
      * with a real, content-bearing page on this site are listed.
      */
+    /**
+     * Built from the location data, so a city is claimed as served only when
+     * it has a page saying something true about how it is served.
+     */
     areaServed: [
-      { "@type": "City", name: "Ludhiana" },
-      { "@type": "City", name: "Chandigarh" },
-      { "@type": "City", name: "Mohali" },
-      { "@type": "City", name: "Jalandhar" },
-      { "@type": "City", name: "Amritsar" },
+      ...locations.map((l) => ({ "@type": "City", name: l.city })),
       { "@type": "State", name: "Punjab" },
+      { "@type": "Country", name: "India" },
     ],
+    /**
+     * What this business is knowledgeable about. Unlike the `keywords` meta
+     * tag, `knowsAbout` is read by search engines building an entity
+     * understanding of the business, so every term here is one the site
+     * genuinely has content for.
+     */
     knowsAbout: [
       "Bespoke tailoring",
-      "Men's suits",
-      "Wedding suits",
       "Made-to-measure clothing",
+      "Men's suits",
+      "Two-piece suits",
+      "Three-piece suits",
+      "Wedding suits",
+      "Groom suits",
+      "Corporate suits",
+      "Blazers",
       "Custom shirts",
-      "Garment alterations",
+      "Custom trousers",
+      "Bandhgala",
+      "Jodhpuri suits",
+      "Nehru jackets",
+      "Tuxedos",
+      "Suit alterations",
+      "Suiting fabrics",
+      "Garment fitting",
     ],
+    /**
+     * The catalogue, built from the same service data that builds the pages,
+     * so an offer cannot exist here without a page behind it.
+     */
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Tailoring services",
+      itemListElement: services.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.title,
+          description: service.lede,
+          url: absoluteUrl(service.href),
+        },
+      })),
+    },
   });
 }
 

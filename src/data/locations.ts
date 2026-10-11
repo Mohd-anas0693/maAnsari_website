@@ -357,6 +357,118 @@ export const locations: Location[] = [
       },
     ],
   },
+
+  {
+    slug: "patiala",
+    city: "Patiala",
+    region: "Punjab",
+    serviceModel: "travel-in",
+    metaTitle: "Bespoke Suits for Patiala Customers",
+    metaDescription:
+      "Custom suits, wedding and groom tailoring for customers travelling from Patiala to our Ludhiana studio, with visits combined to reduce the journey.",
+    title: "For Customers Travelling from Patiala",
+    lede: "A city with its own formal dress history, and a straightforward road to the bench.",
+    intro: [
+      "Patiala has a longer relationship with tailored formalwear than most cities in Punjab, and customers arriving from there tend to know what they want in a way that makes a consultation quicker. Closed-neck jackets, in particular, are asked for by name more often than anywhere else we serve.",
+      "There is no Patiala branch. Everything is made at the Ludhiana studio, and the practical question is the usual one: how few visits the commission can be done in.",
+    ],
+    availability: {
+      heading: "How a commission works from Patiala",
+      body: [
+        "Consultation, measurement and cloth selection are handled in one extended sitting, with every garment in the commission measured at the same visit rather than spread across trips.",
+        "If you are commissioning a bandhgala, a Jodhpuri or a sherwani-length tailored jacket, say so when booking. Those have a higher closure and a different collar, and we will set aside the extra time the first fitting needs.",
+      ],
+    },
+    gettingHere: [
+      "Patiala connects to Ludhiana by road via Rajpura and the Ambala–Ludhiana route, and by rail with services through Rajpura Junction.",
+      "Morning appointments suit customers travelling in, and they leave room for a fitting to run long without costing you the day.",
+    ],
+    faqs: [
+      {
+        question: "Do you serve customers from Patiala?",
+        answer:
+          "Yes. Customers travel to the Ludhiana studio for consultation, measurement and fittings. There is no branch in Patiala, and visits are planned so that the journey is made as few times as the garment allows.",
+      },
+      {
+        question: "Can you tailor a bandhgala or Jodhpuri suit for a Patiala wedding?",
+        answer:
+          "Yes. A bandhgala is a structured, closed-neck jacket and is cut, canvassed and fitted the way any tailored jacket is. A Jodhpuri is the same jacket cut as a matched set with its trousers. Traditional embroidered sherwani work is a different craft and we do not take it on.",
+      },
+    ],
+    related: [
+      {
+        label: "Bandhgala and Indian formalwear",
+        href: "/indian-formalwear",
+        note: "What each garment is, and which ones we make.",
+      },
+      {
+        label: "Wedding suits",
+        href: "/wedding-suits",
+        note: "Planning a groom's wardrobe around the functions.",
+      },
+      {
+        label: "Contact",
+        href: "/contact",
+        note: "Discuss the commission before you travel.",
+      },
+    ],
+  },
+
+  {
+    slug: "bathinda",
+    city: "Bathinda",
+    region: "Punjab",
+    serviceModel: "travel-in",
+    metaTitle: "Custom Suit Tailoring for Bathinda Customers",
+    metaDescription:
+      "Bespoke suits and wedding tailoring for customers from Bathinda, made at our Ludhiana studio with visits combined to keep the journey to a minimum.",
+    title: "For Customers Travelling from Bathinda",
+    lede: "The longest road of the cities we serve, so the planning matters more.",
+    intro: [
+      "Bathinda is further from the studio than anywhere else we regularly work with, and there is no point pretending the distance away. A commission from Bathinda needs to be planned around the journey rather than in spite of it.",
+      "In practice that means fewer visits, each one longer, more settled by phone beforehand, and an earlier start than a Ludhiana customer would need.",
+    ],
+    availability: {
+      heading: "How a commission works from Bathinda",
+      body: [
+        "We aim for two visits. The first combines consultation, measurement and cloth selection in one long sitting. The second combines the fitting and collection, with the garment prepared so corrections can be made while you are still in Ludhiana.",
+        "That is not always achievable. A garment needing significant correction at the first fitting needs a third visit, and we will tell you so rather than hand over something that does not fit. Which route is realistic depends on the garment, and you will hear our honest view at the consultation.",
+      ],
+    },
+    gettingHere: [
+      "Bathinda connects to Ludhiana by road via Barnala and by rail on the Bathinda–Ludhiana line, with direct services most days.",
+      "Because the journey is long, we hold extended appointment slots for customers travelling from Bathinda. Say so when booking and the time is reserved.",
+    ],
+    faqs: [
+      {
+        question: "Is it practical to commission a suit from Bathinda?",
+        answer:
+          "Yes, with planning. Visits are combined so consultation, measurement and cloth selection happen in one sitting and the fitting and collection in another. Where a garment needs more correction than that allows, a third visit is required, and we will say so rather than compromise the fit.",
+      },
+      {
+        question: "How early should a Bathinda customer start a wedding commission?",
+        answer:
+          "As soon as the dates are fixed. Travel adds scheduling constraints to a process that already needs space between fittings, so the first conversation should happen well before the first visit.",
+      },
+    ],
+    related: [
+      {
+        label: "Wedding suits",
+        href: "/wedding-suits",
+        note: "Planning a groom's wardrobe around travel and fitting dates.",
+      },
+      {
+        label: "Bespoke tailoring",
+        href: "/bespoke-tailoring",
+        note: "What each stage involves and how many fittings to expect.",
+      },
+      {
+        label: "Contact",
+        href: "/contact",
+        note: "Start with a call before you plan the journey.",
+      },
+    ],
+  },
 ];
 
 export const locationBySlug = new Map(locations.map((l) => [l.slug, l]));

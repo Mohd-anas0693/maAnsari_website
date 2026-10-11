@@ -21,6 +21,15 @@ export interface PageMetaInput {
   modifiedTime?: string;
   /** Set for pages that should exist but not be indexed. */
   noIndex?: boolean;
+  /**
+   * Search terms this page genuinely answers.
+   *
+   * Emitted as the `keywords` meta tag, which Google has ignored since 2009.
+   * It is here because it costs a few bytes and some smaller engines still
+   * read it — not because it ranks anything. The terms do their actual work
+   * in the headings, body copy and structured data of the page itself.
+   */
+  keywords?: string[];
 }
 
 const DEFAULT_OG_IMAGE = "/opengraph-image";
@@ -35,6 +44,7 @@ export function buildMetadata({
   publishedTime,
   modifiedTime,
   noIndex = false,
+  keywords,
 }: PageMetaInput): Metadata {
   const canonicalPath = path === "/" ? "/" : path.replace(/\/$/, "");
   const url = `${siteConfig.url}${canonicalPath === "/" ? "" : canonicalPath}`;
@@ -43,6 +53,7 @@ export function buildMetadata({
   return {
     title,
     description,
+    ...(keywords && keywords.length > 0 ? { keywords } : {}),
     alternates: {
       canonical: canonicalPath,
     },

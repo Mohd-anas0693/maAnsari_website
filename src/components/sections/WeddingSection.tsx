@@ -34,7 +34,7 @@ export function WeddingSection() {
     <section
       id="weddings"
       aria-labelledby="weddings-heading"
-      className="relative border-t border-hairline bg-ink-900 py-24 lg:py-36"
+      className="relative border-t border-hairline bg-ink-900 py-14 sm:py-14 sm:py-18 lg:py-24"
     >
       <div className="shell">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-12">
@@ -69,22 +69,22 @@ export function WeddingSection() {
             <ImageReveal
               src="/images/collections/wedding-suit.webp"
               alt="An ivory three-piece wedding suit prepared for a groom's final fitting"
-              ratio="16/11"
+              ratio="16/9"
               sizes="(min-width: 1024px) 48vw, 100vw"
               className="border border-hairline"
               parallax
             />
 
-            <dl className="mt-10 grid gap-px sm:grid-cols-2">
+            <dl className="mt-8 grid grid-cols-2 gap-x-5 sm:gap-x-8 lg:mt-10">
               {OCCASIONS.map((occasion) => (
                 <Reveal
                   key={occasion.title}
-                  className="border-t border-hairline py-6"
+                  className="border-t border-hairline py-5"
                 >
-                  <dt className="font-display text-[1.375rem] leading-none text-ivory">
+                  <dt className="font-display text-[1.125rem] leading-tight text-ivory sm:text-[1.375rem]">
                     {occasion.title}
                   </dt>
-                  <dd className="prose-editorial mt-3 max-w-[40ch] text-[0.9375rem]">
+                  <dd className="prose-editorial mt-2.5 max-w-[40ch] text-[0.8125rem] sm:text-[0.9375rem]">
                     {occasion.body}
                   </dd>
                 </Reveal>

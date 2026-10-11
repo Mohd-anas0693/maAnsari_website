@@ -144,54 +144,71 @@ export interface ProcessStep {
   title: string;
   summary: string;
   body: string;
+  /**
+   * A distinct one-liner for the compact listing on the home page.
+   *
+   * Deliberately NOT the same string as `summary`. The home page and
+   * /our-craft both carry this sequence, and reusing the copy had them
+   * sharing a third of their phrasing — two important pages competing for
+   * the same queries instead of covering different ground.
+   */
+  brief: string;
 }
 
 export const processSteps: ProcessStep[] = [
   {
     number: "01",
     title: "Consultation",
+    brief: "What the garment is for.",
     summary: "What the garment is for, before what it looks like.",
     body: "We start with the occasion, the setting and how often the garment will be worn. A suit for one wedding and a suit for four days a week are different commissions, and the decisions that follow all depend on knowing which one this is.",
   },
   {
     number: "02",
     title: "Measurements",
+    brief: "Taken on the body, not from a chart.",
     summary: "Taken on the body, in the posture you actually hold.",
     body: "Beyond the obvious dimensions, we record shoulder slope, stance, and the asymmetries almost everyone has. These are noted as proportions to work with, not as faults to correct, and they are what allow the finished garment to hang cleanly rather than merely fit numerically.",
   },
   {
     number: "03",
     title: "Fabric Selection",
+    brief: "Weight and weave against the season.",
     summary: "Weight and weave chosen against season and use.",
     body: "Cloth is handled, draped over the shoulder and seen in daylight before it is chosen. We will be direct about how a cloth behaves in a Punjab summer, how it recovers from creasing, and how it will photograph, because those matter more in practice than how it looks folded on a shelf.",
   },
   {
     number: "04",
     title: "Pattern",
+    brief: "Your proportions, drafted on paper.",
     summary: "Your measurements, drafted into paper.",
     body: "The pattern is where posture and proportion are resolved. Front and back balance, shoulder slope and sleeve pitch are all decided at this stage, on paper, where a correction costs nothing but a pencil line.",
   },
   {
     number: "05",
     title: "Cutting",
+    brief: "One length of cloth, no second attempt.",
     summary: "The irreversible step, checked twice.",
     body: "Cloth is laid, the pattern positioned with the grain running true, and the panels cut. Pattern matching across the front, the pockets and the collar is planned before the shears move, because there is no second attempt on a single length of cloth.",
   },
   {
     number: "06",
     title: "Stitching",
+    brief: "Where the structure goes in.",
     summary: "Assembly, with structure built in.",
     body: "Panels are joined, canvas and interlining are set, pockets are made and the lining is fitted. This is the longest stage and the least visible one, and it is where the difference between a garment that holds its shape and one that collapses is decided.",
   },
   {
     number: "07",
     title: "Fitting",
+    brief: "Marked on you, standing and seated.",
     summary: "Corrected on you, not on a form.",
     body: "The garment is fitted on your body and marked. Sleeve pitch, waist suppression, jacket length and trouser break are all confirmed here, standing and seated, in the shoes you intend to wear. More than one fitting is normal and is a sign of care, not of error.",
   },
   {
     number: "08",
     title: "Final Finish",
+    brief: "Buttonholes, pressing, a final look.",
     summary: "Buttonholes, pressing, and a last look.",
     body: "Buttonholes are worked and buttons set against your stance. The garment is pressed to shape rather than flat, and then checked once more on you before it leaves. If something is not right, it goes back.",
   },
@@ -206,6 +223,8 @@ export interface FabricFamily {
   character: string;
   bestFor: string;
   note: string;
+  /** Short, home-page-only line. Distinct from `character` on purpose. */
+  brief: string;
   image: { src: string; alt: string };
 }
 
@@ -213,6 +232,7 @@ export const fabricFamilies: FabricFamily[] = [
   {
     name: "Worsted Wool",
     character: "Smooth, tightly twisted, resilient.",
+    brief: "The year-round default.",
     bestFor: "Business suits, year-round formal wear",
     note: "The workhorse of tailoring. A tighter twist resists creasing and recovers overnight, which is what lets a suit survive daily wear without looking tired by Wednesday.",
     image: {
@@ -223,8 +243,9 @@ export const fabricFamilies: FabricFamily[] = [
   {
     name: "Wool Blends",
     character: "Lighter, more forgiving, often cooler.",
+    brief: "Lighter, cooler, known here as terry wool.",
     bestFor: "Warm-weather suits, daytime functions",
-    note: "Blending wool with other fibres can reduce weight and improve crease resistance. The trade-off is usually in drape and in how the cloth takes a press, so the blend is chosen for the garment rather than as a default.",
+    note: "This is the family most customers know as terry wool or poly wool — wool blended with polyester or other fibres. Blending reduces weight, improves crease resistance and lowers cost. The trade-off is in drape and in how the cloth takes a press, so the blend is chosen for the garment rather than used as a default.",
     image: {
       src: "/images/fabrics/wool-blend.webp",
       alt: "Close-up of a light grey wool blend cloth with visible weave texture",
@@ -233,6 +254,7 @@ export const fabricFamilies: FabricFamily[] = [
   {
     name: "Linen & Linen Blends",
     character: "Open, breathable, deliberately relaxed.",
+    brief: "For heat, and it will crease.",
     bestFor: "Summer daytime events, engagement functions",
     note: "Linen creases. That is its nature, not a defect, and pretending otherwise leads to disappointment. In exchange it moves air better than almost anything else, which matters at an outdoor function in May.",
     image: {
@@ -243,6 +265,7 @@ export const fabricFamilies: FabricFamily[] = [
   {
     name: "Cotton",
     character: "Crisp, matte, informal in the best sense.",
+    brief: "Shirts, and summer trousers.",
     bestFor: "Shirts, summer trousers, soft jackets",
     note: "For shirting, cotton is the default and the weave does the work: poplin is smooth and formal, oxford has texture and hides creasing, twill drapes well and wrinkles less.",
     image: {
@@ -253,6 +276,7 @@ export const fabricFamilies: FabricFamily[] = [
   {
     name: "Winter Weights",
     character: "Heavier, with a fuller hand and better drape.",
+    brief: "Drape you only get in cold months.",
     bestFor: "Winter weddings, evening receptions",
     note: "A heavier cloth hangs more cleanly, holds a press longer and photographs with more depth. North Indian winters are one of the few Indian contexts where the full benefit of a heavier cloth is available without discomfort.",
     image: {
@@ -262,12 +286,24 @@ export const fabricFamilies: FabricFamily[] = [
   },
   {
     name: "Texture & Pattern",
-    character: "Checks, herringbones, and tonal weaves.",
+    character: "Checks, herringbones, tweeds and tonal weaves.",
+    brief: "What lets a jacket stand alone.",
     bestFor: "Blazers, separates, second and third suits",
-    note: "Texture is what lets a jacket be worn on its own. It is also what keeps a dark suit from reading flat in photographs, where a smooth cloth can lose all its detail under a flash.",
+    note: "Texture is what lets a jacket be worn on its own. Herringbone, birdseye, sharkskin and tweed all read as cloth rather than as a flat colour, which is also what keeps a dark suit from disappearing in photographs under a flash.",
     image: {
       src: "/images/fabrics/texture-pattern.webp",
-      alt: "Close-up of a herringbone weave in charcoal and grey",
+      alt: "Close-up of a herringbone weave in charcoal and grey suiting",
+    },
+  },
+  {
+    name: "Occasion Cloths",
+    character: "Velvet, raw silk and jacquard, for one night.",
+    brief: "Velvet and raw silk, for one night.",
+    bestFor: "Reception jackets, sangeet, engagement",
+    note: "Velvet, raw silk and jacquard are asked for by name for receptions, usually as a single jacket rather than a full suit. They photograph richly under warm light and they are unforgiving of poor cutting, because there is no pattern to hide a seam in. Best treated as a second garment, not the one you also wear to the ceremony.",
+    image: {
+      src: "/images/fabrics/winter-weight.webp",
+      alt: "Close-up of a deep-toned occasion cloth with a soft pile",
     },
   },
 ];

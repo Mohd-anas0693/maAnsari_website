@@ -28,6 +28,8 @@ export interface Article {
   updated?: string;
   readingMinutes: number;
   category: string;
+  /** Search terms this article genuinely answers. */
+  tags?: string[];
   excerpt: string;
   image: { src: string; alt: string };
   blocks: Block[];
@@ -45,6 +47,7 @@ export const articles: Article[] = [
     published: "2026-01-14",
     readingMinutes: 9,
     category: "Weddings",
+    tags: ["wedding suit Ludhiana", "groom suit", "dulha coat pant", "reception suit", "engagement suit", "wedding suit colour", "groom wardrobe"],
     excerpt:
       "Most wedding suit regrets are scheduling problems, not taste problems. Here is how to plan the wardrobe function by function.",
     image: {
@@ -200,6 +203,7 @@ export const articles: Article[] = [
     published: "2026-02-03",
     readingMinutes: 6,
     category: "Guides",
+    tags: ["two piece vs three piece", "3 piece suit", "waistcoat suit", "coat pant with waistcoat", "which suit to choose"],
     excerpt:
       "The waistcoat is not a decoration. It changes the formality, the warmth and the number of occasions a suit can cover.",
     image: {
@@ -305,6 +309,7 @@ export const articles: Article[] = [
     published: "2026-02-21",
     readingMinutes: 8,
     category: "Fit",
+    tags: ["suit fit guide", "how should a suit fit", "shoulder fit", "trouser break", "coat pant fitting"],
     excerpt:
       "Most fit problems are visible to anyone once they know where to look. Here is the order to look in.",
     image: {
@@ -445,6 +450,7 @@ export const articles: Article[] = [
     published: "2026-03-09",
     readingMinutes: 7,
     category: "Weddings",
+    tags: ["wedding suit colour", "maroon suit", "royal blue suit", "ivory groom suit", "midnight blue suit", "best suit colour for wedding"],
     excerpt:
       "Colour choice is a lighting decision more than a fashion one. What reads well at noon rarely reads well at ten at night.",
     image: {
@@ -479,7 +485,7 @@ export const articles: Article[] = [
               "The classic groom's choice for a daytime ceremony. Warm against most Indian skin tones and it photographs beautifully in natural light. It also shows every mark, so plan accordingly.",
           },
           {
-            term: "Sand and stone",
+            term: "Sand, stone and beige",
             detail:
               "More forgiving than ivory and less stark. Excellent in strong daylight and genuinely wearable again afterwards.",
           },
@@ -514,9 +520,14 @@ export const articles: Article[] = [
               "Slightly softer than midnight blue and more useful afterwards. A good choice if the suit needs a second life.",
           },
           {
-            term: "Burgundy and oxblood",
+            term: "Maroon, wine and burgundy",
             detail:
-              "Distinctive without being costume. Works particularly well in a textured cloth under warm reception lighting.",
+              "The same family, and the one asked for most often for receptions in Punjab. Distinctive without being costume, and particularly good in a textured cloth under warm lighting.",
+          },
+          {
+            term: "Royal blue",
+            detail:
+              "Brighter and more photographic than navy, and a common choice for a sangeet or an engagement where the ceremony suit is more restrained.",
           },
           {
             term: "Deep forest and bottle green",
@@ -592,6 +603,7 @@ export const articles: Article[] = [
     published: "2026-03-28",
     readingMinutes: 7,
     category: "Guides",
+    tags: ["custom vs readymade suit", "bespoke vs made to measure", "stitched suit vs readymade"],
     excerpt:
       "Ready-made is sometimes the correct choice. Knowing when is worth more than knowing that bespoke is better.",
     image: {
@@ -710,6 +722,7 @@ export const articles: Article[] = [
     published: "2026-04-16",
     readingMinutes: 5,
     category: "Guides",
+    tags: ["suit stitching time", "how long does a suit take", "wedding suit timeline"],
     excerpt:
       "The honest answer is that it depends, and the reasons it depends are the same reasons the garment will be good.",
     image: {

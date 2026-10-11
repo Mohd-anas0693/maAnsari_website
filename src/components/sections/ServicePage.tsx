@@ -117,7 +117,7 @@ export function ServicePage({ service }: { service: Service }) {
       {/* Internal links, with descriptive anchors and context */}
       <section
         aria-labelledby="related-heading"
-        className="border-t border-hairline py-20 lg:py-28"
+        className="border-t border-hairline py-14 sm:py-18 lg:py-24"
       >
         <div className="shell">
           <h2 id="related-heading" className="eyebrow mb-10">

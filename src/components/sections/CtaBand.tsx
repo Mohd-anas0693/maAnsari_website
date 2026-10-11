@@ -23,7 +23,7 @@ export function CtaBand({
   const wa = whatsappUrl("appointment");
 
   return (
-    <section className="relative border-t border-hairline py-24 lg:py-32">
+    <section className="relative border-t border-hairline py-14 sm:py-18 lg:py-24">
       <div className="shell">
         <div className="max-w-4xl">
           <TextReveal

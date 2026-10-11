@@ -85,7 +85,7 @@ export default function AboutPage() {
           Replace with the real account: who started the house, what they
           trained in, and why. Keep it specific and verifiable.
       ------------------------------------------------------------------ */}
-      <section className="border-t border-hairline py-16 lg:py-24">
+      <section className="border-t border-hairline py-12 sm:py-16 lg:py-20">
         <div className="shell grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
             <Reveal>
@@ -119,7 +119,7 @@ export default function AboutPage() {
       {/* ------------------------------------------------------------------
           PLACEHOLDER — THE WORKSHOP AND TEAM
       ------------------------------------------------------------------ */}
-      <section className="border-t border-hairline py-16 lg:py-24">
+      <section className="border-t border-hairline py-12 sm:py-16 lg:py-20">
         <div className="shell grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
             <Reveal>
@@ -153,7 +153,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-t border-hairline py-16 lg:py-24">
+      <section className="border-t border-hairline py-12 sm:py-16 lg:py-20">
         <div className="shell grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
             <Reveal>

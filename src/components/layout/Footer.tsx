@@ -19,8 +19,8 @@ export function Footer() {
 
   return (
     <footer className="relative border-t border-hairline bg-ink-950">
-      <div className="shell py-20 lg:py-28">
-        <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
+      <div className="shell py-14 sm:py-16 lg:py-24">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
           {/* Identity and contact */}
           <div className="lg:col-span-4">
             <p className="font-display text-[1.75rem] leading-none text-ivory">
@@ -30,13 +30,13 @@ export function Footer() {
               {BRAND_SUFFIX}
             </p>
 
-            <p className="prose-editorial mt-7 max-w-[34ch] text-[0.9375rem]">
+            <p className="prose-editorial mt-5 max-w-[34ch] text-[0.875rem]">
               A bespoke men&rsquo;s tailoring house in {siteConfig.address.locality},{" "}
               {siteConfig.address.region}. Suits, blazers, trousers and shirts,
               measured and finished for the way you wear them.
             </p>
 
-            <address className="mt-8 not-italic">
+            <address className="mt-6 not-italic">
               <p className="font-sans text-[0.875rem] leading-relaxed text-bone">
                 {formatAddress()}
               </p>
@@ -79,7 +79,7 @@ export function Footer() {
                 href={wa}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex items-center gap-2.5 border border-hairline-strong px-5 py-3.5 font-sans text-[0.625rem] font-medium uppercase tracking-[0.18em] text-ivory transition-colors duration-300 hover:border-champagne hover:text-champagne"
+                className="mt-6 inline-flex items-center gap-2.5 border border-hairline-strong px-5 py-3.5 font-sans text-[0.625rem] font-medium uppercase tracking-[0.18em] text-ivory transition-colors duration-300 hover:border-champagne hover:text-champagne"
               >
                 <WhatsAppIcon className="h-4 w-4" />
                 Chat on WhatsApp
@@ -88,11 +88,11 @@ export function Footer() {
           </div>
 
           {/* Link columns and areas served share the right two-thirds. */}
-          <div className="grid gap-12 sm:grid-cols-2 lg:col-span-7 lg:col-start-6 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-8 lg:col-span-7 lg:col-start-6 lg:grid-cols-4 lg:gap-10">
             {footerNav.map((column) => (
               <nav key={column.title} aria-label={column.title}>
-                <h2 className="eyebrow mb-6">{column.title}</h2>
-                <ul className="flex flex-col gap-3">
+                <h2 className="eyebrow mb-4">{column.title}</h2>
+                <ul className="flex flex-col gap-2.5">
                   {column.links.map((link) => (
                     <li key={link.href}>
                       <Link
@@ -109,8 +109,8 @@ export function Footer() {
 
             {/* Areas served */}
             <div>
-              <h2 className="eyebrow mb-6">Areas Served</h2>
-              <ul className="flex flex-col gap-3">
+              <h2 className="eyebrow mb-4">Areas Served</h2>
+              <ul className="flex flex-col gap-2.5">
                 {locations.map((location) => (
                   <li key={location.slug}>
                     <Link
@@ -126,7 +126,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col gap-6 border-t border-hairline pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-5 border-t border-hairline pt-7 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-sans text-[0.75rem] text-ash">
             &copy; {year} {BRAND_NAME} {BRAND_SUFFIX}. All rights reserved.
           </p>

@@ -71,7 +71,7 @@ export default function JournalPage() {
         </section>
       ) : null}
 
-      <section className="border-t border-hairline py-16 lg:py-24">
+      <section className="border-t border-hairline py-12 sm:py-16 lg:py-20">
         <div className="shell">
           <h2 className="eyebrow mb-12">More from the journal</h2>
           <ul className="grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">

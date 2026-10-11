@@ -10,6 +10,7 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { JsonLd } from "@/components/JsonLd";
 import { articleSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
+import { keywordsFor } from "@/data/keywords";
 import { ArrowIcon } from "@/components/ui/icons";
 
 export function generateStaticParams() {
@@ -34,6 +35,10 @@ export async function generateMetadata(
     type: "article",
     publishedTime: article.published,
     modifiedTime: article.updated,
+    keywords: keywordsFor(
+      [article.shortTitle, article.category],
+      article.tags ?? [],
+    ),
   });
 }
 
@@ -154,7 +159,7 @@ export default async function ArticlePage(props: PageProps<"/journal/[slug]">) {
       {more.length > 0 ? (
         <section
           aria-labelledby="more-journal"
-          className="border-t border-hairline py-20 lg:py-24"
+          className="border-t border-hairline py-14 sm:py-18 lg:py-20"
         >
           <div className="shell">
             <h2 id="more-journal" className="eyebrow mb-10">

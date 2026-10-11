@@ -17,6 +17,7 @@ export function Wordmark({
   return (
     <Link
       href="/"
+      prefetch={false}
       className={cn(
         "group inline-flex shrink-0 flex-col whitespace-nowrap leading-none",
         className,

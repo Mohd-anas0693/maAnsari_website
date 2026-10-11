@@ -11,6 +11,7 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { JsonLd } from "@/components/JsonLd";
 import { faqSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
+import { keywordsFor } from "@/data/keywords";
 import { ArrowIcon } from "@/components/ui/icons";
 
 /** Only cities with real, distinct content exist as routes. */
@@ -31,6 +32,15 @@ export async function generateMetadata(
     title: location.metaTitle,
     description: location.metaDescription,
     path: `/locations/${location.slug}`,
+    keywords: keywordsFor([
+      `tailor in ${location.city}`,
+      `suit stitching ${location.city}`,
+      `coat pant ${location.city}`,
+      `wedding suit tailor ${location.city}`,
+      `bespoke suits ${location.city}`,
+      `men's tailor ${location.city}`,
+      `custom suits ${location.region}`,
+    ]),
   });
 }
 
@@ -150,7 +160,7 @@ export default async function LocationPage(
 
       <section
         aria-labelledby="loc-related"
-        className="border-t border-hairline py-20 lg:py-24"
+        className="border-t border-hairline py-14 sm:py-18 lg:py-20"
       >
         <div className="shell">
           <h2 id="loc-related" className="eyebrow mb-10">

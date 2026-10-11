@@ -11,7 +11,7 @@ export function Introduction() {
   return (
     <section
       aria-labelledby="intro-heading"
-      className="relative border-t border-hairline py-24 lg:py-36"
+      className="relative border-t border-hairline py-14 sm:py-14 sm:py-18 lg:py-24"
     >
       <div className="shell grid gap-14 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">
@@ -61,41 +61,32 @@ export function Introduction() {
               pencil line.
             </p>
             <p>
-              What follows is a sequence of decisions rather than a purchase.
-              Cloth is chosen by weight and weave against the season it will be
-              worn in, not by how it looks folded on a shelf. Silhouette is
-              settled against your frame and your intentions for the garment.
-              Details — the lapel, the pockets, the button stance, the break at
-              the shoe — are specified rather than inherited.
-            </p>
-            <p>
-              Then the garment is fitted on your body, standing and seated, in
-              the shoes you will actually wear. It is opened, corrected and
-              remade. That step is the whole point, and it is the one a
-              ready-made garment can never offer.
+              What follows is a sequence of decisions rather than a purchase:
+              cloth chosen by weight and weave against the season it will be
+              worn in, silhouette settled against your frame, details specified
+              rather than inherited. Then the garment is fitted on your body,
+              standing and seated, in the shoes you will actually wear, and it
+              is opened, corrected and remade. That step is the whole point,
+              and it is the one a ready-made garment can never offer.
             </p>
           </Reveal>
 
-          <Reveal
-            className="mt-12 grid gap-px border-t border-hairline sm:grid-cols-3"
-            delay={260}
-            staggerChildren="[data-stat]"
-          >
+          <div className="mt-12 grid gap-px border-t border-hairline sm:grid-cols-3">
             {[
               { label: "Measured", value: "In person" },
               { label: "Fittings", value: "Typically two" },
               { label: "Cut", value: "To your pattern" },
-            ].map((item) => (
-              <div key={item.label} data-stat className="pt-6">
+            ].map((item, index) => (
+              <Reveal key={item.label} delay={index * 120} className="pt-6">
                 <p className="font-sans text-[0.5625rem] uppercase tracking-[0.3em] text-brass">
                   {item.label}
                 </p>
                 <p className="mt-3 font-display text-[1.5rem] leading-none text-ivory">
                   {item.value}
                 </p>
-              </div>
+              </Reveal>
             ))}
-          </Reveal>
+          </div>
         </div>
       </div>
     </section>

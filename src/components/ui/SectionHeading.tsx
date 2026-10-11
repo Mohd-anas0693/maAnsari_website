@@ -45,7 +45,7 @@ export function SectionHeading({
         </Reveal>
       ) : null}
 
-      <TextReveal as={as} lines={lines} className={sizeClass} delay={80} />
+      <TextReveal as={as} lines={lines} className={sizeClass} />
 
       {standfirst ? (
         <Reveal

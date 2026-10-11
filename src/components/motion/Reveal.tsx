@@ -1,58 +1,45 @@
-"use client";
-
-import { useEffect, useRef, type ElementType, type ReactNode } from "react";
-import { observeInView } from "@/hooks/useInView";
-import { prefersReducedMotion } from "@/hooks/useReducedMotion";
-import { revealElement, showImmediately } from "@/animations/reveal";
+import type { CSSProperties, ElementType, ReactNode } from "react";
 
 /**
- * Connects an element to the entrance-animation layer.
+ * Marks an element to fade and rise as it scrolls into view.
  *
- * This component contains no animation code. It decides *when* something
- * should animate; `@/animations/reveal` decides *how*.
+ * A server component with no JavaScript. The animation is a CSS `view()`
+ * timeline declared in globals.css; this only applies the attribute that
+ * selects it.
  *
- * The motion preference is read once, synchronously, inside the effect rather
- * than through a state hook — a hook would render once with the wrong answer
- * and cause a visible flash.
+ * It used to be a client component that registered an IntersectionObserver
+ * and called into the Anime.js layer. The home page renders 98 of these, and
+ * hydrating all of them cost 425ms of blocking time for motion that CSS can
+ * drive on the compositor for nothing.
  */
 export function Reveal({
   children,
   as: Tag = "div",
   variant = "up",
   delay = 0,
-  staggerChildren,
   className,
   id,
 }: {
   children: ReactNode;
   as?: ElementType;
   variant?: "up" | "rise";
+  /**
+   * Nudges this element later in the sequence, so a heading can land before
+   * the paragraph under it. Expressed in milliseconds for readability at the
+   * call site, and converted to a shift in the scroll range, capped so a
+   * large value cannot push an element past its own entry.
+   */
   delay?: number;
-  /** Selector for children to stagger instead of moving the container. */
-  staggerChildren?: string;
   className?: string;
   id?: string;
 }) {
-  const ref = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
-
-    if (prefersReducedMotion()) {
-      showImmediately(element);
-      return;
-    }
-
-    return observeInView(element, () =>
-      revealElement(element, { delay, staggerChildren }),
-    );
-    // Options are fixed per mount by design.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const style =
+    delay > 0
+      ? ({ "--rv-delay": `${Math.min(delay / 25, 12)}%` } as CSSProperties)
+      : undefined;
 
   return (
-    <Tag ref={ref} data-reveal={variant} className={className} id={id}>
+    <Tag data-reveal={variant} className={className} id={id} style={style}>
       {children}
     </Tag>
   );

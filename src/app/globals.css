@@ -146,46 +146,124 @@
    ========================================================================== */
 
 @layer components {
-  .motion-ready [data-reveal] {
-    opacity: 0;
-    will-change: transform, opacity;
-  }
+  /* ------------------------------------------------------------------
+     SCROLL-DRIVEN REVEALS
 
-  .motion-ready [data-reveal="up"] {
-    transform: translate3d(0, 1.75rem, 0);
-  }
+     These run entirely in CSS on a `view()` timeline. There is no
+     JavaScript, no IntersectionObserver and no hydration behind any of
+     them, which is the point: an earlier version wrapped 98 elements on
+     the home page in client components and spent 425ms of main-thread
+     time on nothing but entrance animations.
 
-  .motion-ready [data-reveal="rise"] {
-    transform: translate3d(0, 3.5rem, 0);
-  }
+     The hidden start state lives INSIDE the @supports block. A browser
+     without scroll-driven animations never hides the content in the
+     first place, so there is nothing to recover from.
+
+     Elements already on screen at load resolve past their entry range
+     and render finished, which the observer version had to special-case.
+     ------------------------------------------------------------------ */
 
   /* Masked lines: each line gets its own clipping box so descenders are
-     never cut, and the inner span is what actually travels. */
+     never cut, and the inner span is what actually travels. The timeline
+     is named on the wrapper rather than taken from the span, because the
+     span translates by more than its own height. */
   .mask-line {
     display: block;
     overflow: hidden;
     padding-bottom: 0.14em;
     margin-bottom: -0.14em;
+    view-timeline-name: --mask-line;
+    view-timeline-axis: block;
   }
 
-  .motion-ready [data-reveal-mask] {
-    opacity: 1;
+  /* The frame of a parallax image holds the timeline; the inner layer
+     is what moves, so it cannot drive its own measurements. */
+  [data-parallax-frame] {
+    view-timeline-name: --parallax;
+    view-timeline-axis: block;
   }
 
-  .motion-ready [data-mask-line] {
-    display: block;
-    transform: translate3d(0, 110%, 0);
-    will-change: transform;
+  @supports (animation-timeline: view()) {
+    .motion-ready [data-reveal] {
+      animation: revealUp linear both;
+      animation-timeline: view();
+      /* `--rv-delay` shifts the range later, which is how a heading still
+         lands before the paragraph beneath it. */
+      animation-range: entry calc(5% + var(--rv-delay, 0%)) entry
+        calc(50% + var(--rv-delay, 0%));
+    }
+
+    .motion-ready [data-reveal="rise"] {
+      animation-name: revealRise;
+    }
+
+    .motion-ready [data-mask-line] {
+      display: block;
+      animation: maskLine linear both;
+      animation-timeline: --mask-line;
+      animation-range: entry 6% entry 54%;
+    }
+
+    .motion-ready [data-reveal-clip] {
+      animation: clipWipe linear both;
+      animation-timeline: view();
+      animation-range: entry 2% entry 46%;
+    }
+
+    .motion-ready [data-parallax] {
+      animation: parallaxDrift linear both;
+      animation-timeline: --parallax;
+      animation-range: cover 0% cover 100%;
+    }
   }
 
-  .motion-ready [data-reveal-clip] {
-    opacity: 1;
-    clip-path: inset(0 0 100% 0);
-    will-change: clip-path;
+  @keyframes revealUp {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 1.75rem, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 
-  [data-revealed] {
-    will-change: auto;
+  @keyframes revealRise {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 3.5rem, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes maskLine {
+    from {
+      transform: translate3d(0, 110%, 0);
+    }
+    to {
+      transform: none;
+    }
+  }
+
+  @keyframes clipWipe {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes parallaxDrift {
+    from {
+      transform: translate3d(0, -3.5%, 0);
+    }
+    to {
+      transform: translate3d(0, 3.5%, 0);
+    }
   }
 
   /* Editorial hairline used between sections and inside grids */
@@ -333,7 +411,9 @@
 
   [data-reveal],
   [data-mask-line],
-  [data-reveal-clip] {
+  [data-reveal-clip],
+  [data-parallax] {
+    animation: none !important;
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
@@ -453,6 +533,17 @@
 @media (min-width: 64rem) {
   .motion-ready .construction__captions {
     min-height: 19rem;
+  }
+}
+
+/* Captions without their explanatory paragraph need less stacking room. */
+.motion-ready .construction__captions--compact {
+  min-height: 9rem;
+}
+
+@media (min-width: 64rem) {
+  .motion-ready .construction__captions--compact {
+    min-height: 11rem;
   }
 }
 

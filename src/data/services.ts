@@ -175,6 +175,7 @@ export const services: Service[] = [
     lede: "One garment, three decisions: the cloth, the cut, and how you intend to wear it.",
     intro: [
       "A suit does more work than any other thing a man owns. It is asked to be formal at a wedding, credible in a meeting, and comfortable for the eleven hours in between. Getting that range out of one garment is a matter of choosing well at the start.",
+      "Most customers here call it a coat pant, and that is the same garment: a jacket and trouser cut from one cloth, with a waistcoat added for a three-piece. We use whichever word you do.",
       "This page covers the choices that actually change the outcome. If you already know the occasion, the dedicated pages for wedding, corporate, two-piece and three-piece commissions go further.",
     ],
     image: {
@@ -225,6 +226,39 @@ export const services: Service[] = [
           "Four measurements decide whether a suit looks made or bought: the shoulder, the collar, the sleeve pitch and the trouser rise. Everything else can be corrected later. These four are cut in from the beginning, and they are what the first fitting exists to verify.",
         ],
       },
+      {
+        heading: "What you call it, and what you are ordering",
+        body: [
+          "Customers arrive with different words for the same garment, and occasionally with the same word for different garments. It is worth being precise before cloth is cut, because a coat pant and a three-piece are a different quantity of cloth and a different number of fittings.",
+        ],
+        points: [
+          {
+            term: "Coat pant",
+            detail:
+              "A two-piece suit: one jacket, one trouser, one cloth. The most common order here, and the most useful single garment to own.",
+          },
+          {
+            term: "Coat pant with waistcoat",
+            detail:
+              "A three-piece. The waistcoat is cut from the same length, which is why it has to be decided before cutting rather than added later.",
+          },
+          {
+            term: "Single coat, or blazer",
+            detail:
+              "A jacket with no matching trouser, cut from the start to be worn on its own. Usually in a cloth with more texture.",
+          },
+          {
+            term: "Safari, bandhgala, Jodhpuri",
+            detail:
+              "Structured jackets with a different collar and closure. All tailoring, all made here — see Indian formalwear for what each one is.",
+          },
+          {
+            term: "Suit silai or stitching charges",
+            detail:
+              "The cost of making, quoted after we know the garment, the construction and whether the cloth is yours or ours. There is no single figure because there is no single garment.",
+          },
+        ],
+      },
     ],
     faqs: [
       {
@@ -236,6 +270,16 @@ export const services: Service[] = [
         question: "Should I choose a two-piece or a three-piece suit?",
         answer:
           "A two-piece is more versatile and more comfortable in heat. A three-piece adds a waistcoat, which reads more formal, photographs better, and lets you remove the jacket without losing the finished look. For weddings the three-piece is the more common choice; for daily business wear, the two-piece.",
+      },
+      {
+        question: "Do you make coat pant?",
+        answer:
+          "Yes — coat pant is the same garment we call a two-piece suit: a jacket and trouser cut from one cloth to your measurements. Add a waistcoat and it becomes a three-piece. We use whichever word you are comfortable with.",
+      },
+      {
+        question: "What are your suit stitching charges?",
+        answer:
+          "There is no single figure, because there is no single garment. What it costs to make depends on the configuration, the construction, the number of fittings and whether the cloth is yours or ours. Bring the occasion to a consultation and you will leave with a number rather than a range.",
       },
       {
         question: "What suit colour works for an Indian wedding?",

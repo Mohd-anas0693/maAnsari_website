@@ -31,7 +31,7 @@ export function Testimonials() {
   return (
     <section
       aria-labelledby="testimonials-heading"
-      className="relative border-t border-hairline py-24 lg:py-32"
+      className="relative border-t border-hairline py-14 sm:py-18 lg:py-24"
     >
       <div className="shell">
         {hasReviews ? (
